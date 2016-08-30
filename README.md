@@ -24,8 +24,16 @@ Sense HAT messaging system for (cnav-sense)[https://circleci.com/gh/konradko/cna
     $ git remote add resin username@git.resin.io:username/cnavsense.git
     ```
 
-3. Download resin.io application device OS and flash it on an SD card ([etcher.io](https://www.etcher.io/) recommended)
-4. Put the SD card in the Raspberry Pi and wait for it to update (check status on [resin.io](https://dashboard.resin.io/) dashboard)
+3. Enable Pi ~er
+
+| Fleet Configuration variable | Value |
+| ------------- | ------------- |
+| RESIN_HOST_CONFIG_gpu_mem | 256 |
+| RESIN_HOST_CONFIG_fixup_file | fixup_x.dat |
+| RESIN_HOST_CONFIG_start_file | start_x.elf |
+
+4. Download resin.io application device OS and flash it on an SD card ([etcher.io](https://www.etcher.io/) recommended)
+5. Put the SD card in the Raspberry Pi and wait for it to update (check status on [resin.io](https://dashboard.resin.io/) dashboard)
 
 
 ## Monitoring
