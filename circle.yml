@@ -1,0 +1,10 @@
+machine:
+  python:
+    version: 2.7
+
+dependencies:
+  override:
+    - make install_test_requirements
+test:
+  override:
+    - make test

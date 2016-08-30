@@ -1,0 +1,10 @@
+-r common.txt
+
+pytest
+pytest-cov
+xenon
+mock
+flake8
+flake8-polyfill
+radon
+-e git+https://github.com/resin-io/resin-sdk-python.git@master#egg=resin
