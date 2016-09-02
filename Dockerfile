@@ -15,6 +15,7 @@ COPY config/papertrail/papertrail.service /etc/systemd/system/
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     openssh-server \
     avahi-daemon \
+    sense-hat \
     nmap && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -22,7 +23,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 ENV PROMETHEUS_VERSION 0.20.0
 ENV NODE_EXPORTER_VERSION 0.12.0
 ENV ALERTMANAGER_VERSION 0.2.0
-ENV DIST_ARCH linux-armv7
+ENV DIST_ARCH linux-armv6
 
 # default configs
 ENV THRESHOLD_CPU 50
