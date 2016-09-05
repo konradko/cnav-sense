@@ -1,7 +1,18 @@
 # base resin Pi Zero image for python
-FROM resin/raspberrypi-python
+FROM resin/rpi-raspbian:jessie
 
-ENV HOME=/root
+# Install openSSH, nmap (contains ncat required by papertrail),
+# remove the apt list to reduce the size of the image
+RUN apt-get update && apt-get install -yq --no-install-recommends \
+    apt-utils libtool pkg-config build-essential autoconf automake python-dev \
+    libzmq3-dev \
+    python-pip \
+    git \
+    openssh-server \
+    sense-hat \
+    wget \
+    nmap && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install papertrail client
 RUN wget https://github.com/papertrail/remote_syslog2/releases/download/v0.18/remote-syslog2_0.18_armhf.deb \
@@ -10,12 +21,6 @@ RUN wget https://github.com/papertrail/remote_syslog2/releases/download/v0.18/re
 COPY config/papertrail/log_files.yml /etc/
 COPY config/papertrail/papertrail.service /etc/systemd/system/
 
-# Install openSSH, nmap (contains ncat required by papertrail),
-# remove the apt list to reduce the size of the image
-RUN apt-get update && apt-get install -yq --no-install-recommends \
-    openssh-server \
-    nmap && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Prometheus
 ENV PROMETHEUS_VERSION 0.20.0
