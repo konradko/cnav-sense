@@ -10,12 +10,10 @@ RUN wget https://github.com/papertrail/remote_syslog2/releases/download/v0.18/re
 COPY config/papertrail/log_files.yml /etc/
 COPY config/papertrail/papertrail.service /etc/systemd/system/
 
-# Install openSSH, nmap (contains ncat required by papertrail), avahi daemon (Pi Zero OTG USB)
+# Install openSSH, nmap (contains ncat required by papertrail),
 # remove the apt list to reduce the size of the image
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     openssh-server \
-    avahi-daemon \
-    sense-hat \
     nmap && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
