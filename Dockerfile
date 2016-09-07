@@ -5,6 +5,7 @@ FROM resin/rpi-raspbian:jessie
 # remove the apt list to reduce the size of the image
 RUN apt-get update && apt-get install -yq --no-install-recommends \
     apt-utils libtool pkg-config build-essential autoconf automake python-dev \
+    ifupdown \
     libzmq3-dev \
     python-pip \
     git \
@@ -15,9 +16,11 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install papertrail client
-RUN wget https://github.com/papertrail/remote_syslog2/releases/download/v0.18/remote-syslog2_0.18_armhf.deb \
-    && dpkg -i remote-syslog2_0.18_armhf.deb \
-    && rm remote-syslog2_0.18_armhf.deb
+RUN wget https://github.com/papertrail/remote_syslog2/releases/download/v0.18-beta1/remote_syslog_linux_arm.tar.gz \
+    && tar -xzf remote_syslog_linux_arm.tar.gz \
+    && mv remote_syslog/remote_syslog /usr/local/bin/ \
+    && rm -rf remote_syslog \
+    && rm remote_syslog_linux_arm.tar.gz
 COPY config/papertrail/log_files.yml /etc/
 COPY config/papertrail/papertrail.service /etc/systemd/system/
 
