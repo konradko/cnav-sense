@@ -5,7 +5,7 @@ sys.path.append(os.getcwd())
 
 from cnavsense import settings
 from cnavsense.utils import sentry, logger
-from cnavsense.services import environmental, inertial, joystick
+from cnavsense.services import environmental, inertial, joystick, led_matrix
 
 
 @sentry
@@ -15,6 +15,7 @@ def run():
     environmental.Service().start()
     inertial.Service().start()
     joystick.Service().start()
+    led_matrix.Service().start()
 
     logger.info("Done")
 
