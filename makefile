@@ -46,7 +46,7 @@ static_analysis: pep8 xenon
 
 pep8:
 	@echo "Running flake8 over codebase"
-	flake8 --ignore=E501,W391,F999 cnavsense/
+	flake8 --ignore=E501,W391,F999,E402 cnavsense/
 
 xenon:
 	@echo "Running xenon over codebase"
