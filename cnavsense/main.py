@@ -1,3 +1,8 @@
+import os
+import sys
+
+sys.path.append(os.getcwd())
+
 from cnavsense import settings
 from cnavsense.utils import sentry, logger
 from cnavsense.services import environmental, inertial, joystick
