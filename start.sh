@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Enabling I2C"
+modprobe i2c-dev
+
 echo "Starting Papertrail"
 bash /usr/src/app/config/papertrail.sh
 
