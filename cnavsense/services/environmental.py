@@ -1,6 +1,10 @@
 import time
 
 from zmqservices import messages, services, pubsub
+from cnavconstants.publishers import (
+    LOCAL_ENVIRONMENTAL_SENSORS_ADDRESS, ENVIRONMENTAL_SENSORS_SERVICE_PORT
+)
+import cnavconstants.topics
 
 from cnavsense import settings
 from cnavsense.utils import sentry
@@ -8,9 +12,9 @@ from cnavsense.utils import sentry
 
 class Sensors(services.PublisherResource):
     topics = {
-        'humidity': settings.HUMIDITY_TOPIC,
-        'temperature': settings.TEMPERATURE_TOPIC,
-        'pressure': settings.PRESSURE_TOPIC,
+        'humidity': cnavconstants.topics.HUMIDITY_TOPIC,
+        'temperature': cnavconstants.topics.TEMPERATURE_TOPIC,
+        'pressure': cnavconstants.topics.PRESSURE_TOPIC,
     }
 
     def __init__(self, *args, **kwargs):
@@ -47,8 +51,8 @@ class Sensors(services.PublisherResource):
 class Service(services.PublisherService):
     name = 'environmental_sensors'
     resource = Sensors
-    address = settings.LOCAL_ENVIRONMENTAL_SENSORS_PUBLISHER_ADDRESS
-    port = settings.ENVIRONMENTAL_SENSORS_PORT_ADDRESS
+    address = LOCAL_ENVIRONMENTAL_SENSORS_ADDRESS
+    port = ENVIRONMENTAL_SENSORS_SERVICE_PORT
     publisher = pubsub.LastMessagePublisher
     subscriber = pubsub.LastMessageSubscriber
 

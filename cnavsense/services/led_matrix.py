@@ -1,6 +1,9 @@
 import os
 
 from zmqservices import services
+from cnavconstants.publishers import (
+    LOCAL_LED_MATRIX_ADDRESS, LED_MATRIX_PORT_ADDRESS
+)
 
 from cnavsense import settings
 from cnavsense.utils import sentry, logger
@@ -145,8 +148,8 @@ class LedMatrix(services.JsonrpcServerResource):
 class Service(services.JsonrpcServer):
     name = 'led_matrix'
     resource = LedMatrix
-    address = settings.LOCAL_LED_MATRIX_ADDRESS
-    port = settings.LED_MATRIX_PORT_ADDRESS
+    address = LOCAL_LED_MATRIX_ADDRESS
+    port = LED_MATRIX_PORT_ADDRESS
 
 
 @sentry

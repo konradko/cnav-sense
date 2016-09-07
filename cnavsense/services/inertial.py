@@ -1,6 +1,11 @@
 import time
 
 from zmqservices import messages, services, pubsub
+from cnavconstants.publishers import (
+    LOCAL_INERTIAL_SENSORS_ADDRESS, INERTIAL_SENSORS_SERVICE_PORT
+)
+import cnavconstants.topics
+
 
 from cnavsense import settings
 from cnavsense.utils import sentry
@@ -8,8 +13,8 @@ from cnavsense.utils import sentry
 
 class Sensors(services.PublisherResource):
     topics = {
-        'orientation': settings.ORIENTATION_TOPIC,
-        'compass': settings.COMPASS_TOPIC,
+        'orientation': cnavconstants.topics.ORIENTATION_TOPIC,
+        'compass': cnavconstants.topics.COMPASS_TOPIC,
     }
 
     def __init__(self, *args, **kwargs):
@@ -48,8 +53,8 @@ class Sensors(services.PublisherResource):
 class Service(services.PublisherService):
     name = 'inertial_sensors'
     resource = Sensors
-    address = settings.LOCAL_INERTIAL_SENSORS_PUBLISHER_ADDRESS
-    port = settings.INERTIAL_SENSORS_PORT_ADDRESS
+    address = LOCAL_INERTIAL_SENSORS_ADDRESS
+    port = INERTIAL_SENSORS_SERVICE_PORT
     publisher = pubsub.LastMessagePublisher
     subscriber = pubsub.LastMessageSubscriber
 

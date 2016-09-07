@@ -1,4 +1,9 @@
 from zmqservices import messages, services, pubsub
+from cnavconstants.publishers import (
+    LOCAL_JOYSTICK_ADDRESS, JOYSTICK_SERVICE_PORT
+)
+import cnavconstants.topics
+
 
 from cnavsense import settings
 from cnavsense.utils import sentry
@@ -6,7 +11,7 @@ from cnavsense.utils import sentry
 
 class Joystick(services.PublisherResource):
     topics = {
-        'input_event': settings.JOYSTICK_INPUT_TOPIC,
+        'joystick': cnavconstants.topics.JOYSTICK_INPUT_TOPIC,
     }
 
     def __init__(self, *args, **kwargs):
@@ -19,7 +24,7 @@ class Joystick(services.PublisherResource):
             input_event = self.driver.stick.wait_for_event(emptybuffer=True)
 
             self.publisher.send(messages.JSON(
-                topic=self.topics['input_event'],
+                topic=self.topics['joystick'],
                 data=self.format_event(input_event),
             ))
 
@@ -35,8 +40,8 @@ class Joystick(services.PublisherResource):
 class Service(services.PublisherService):
     name = 'joystick'
     resource = Joystick
-    address = settings.LOCAL_JOYSTICK_PUBLISHER_ADDRESS
-    port = settings.JOYSTICK_PORT_ADDRESS
+    address = LOCAL_JOYSTICK_ADDRESS
+    port = JOYSTICK_SERVICE_PORT
     publisher = pubsub.Publisher
     subscriber = pubsub.Subscriber
 
