@@ -22,9 +22,9 @@ class LedMatrix(services.JsonrpcServerResource):
             'set_pixel': self.validate_set_pixel_params,
             'get_pixel': self.validate_get_pixel_params,
             'load_image': self.validate_load_image_params,
-            'flip_horizontally': lambda x: True if not x else False,
-            'flip_vertically': lambda x: True if not x else False,
-            'clear': lambda x: True if not x else False,
+            'flip_horizontally': self.validate_no_params,
+            'flip_vertically': self.validate_no_params,
+            'clear': self.validate_no_params,
             'set_colour': self.validate_set_colour_params,
             'show_message': self.validate_text_and_back_colour_params,
             'show_letter': self.validate_text_and_back_colour_params,
@@ -32,6 +32,10 @@ class LedMatrix(services.JsonrpcServerResource):
                 lambda x: True if (x is True or x is False) else False
             ),
         }
+
+    @staticmethod
+    def validate_no_params(params=None):
+        return params is None
 
     @staticmethod
     def validate_set_rotation_params(params):
