@@ -16,15 +16,15 @@ class LedMatrix(services.JsonrpcServerResource):
 
         self.driver = kwargs.pop('driver', settings.SENSE_HAT_DRIVER)
 
-        self.allowed_methods = {
+        self.endpoints = {
             'set_rotation': self.validate_set_rotation_params,
             'set_pixels': self.validate_set_pixels_params,
             'set_pixel': self.validate_set_pixel_params,
             'get_pixel': self.validate_get_pixel_params,
             'load_image': self.validate_load_image_params,
-            'flip_horizontally': lambda x: True,
-            'flip_vertically': lambda x: True,
-            'clear': lambda x: True,
+            'flip_horizontally': lambda x: True if not x else False,
+            'flip_vertically': lambda x: True if not x else False,
+            'clear': lambda x: True if not x else False,
             'set_colour': self.validate_set_colour_params,
             'show_message': self.validate_text_and_back_colour_params,
             'show_letter': self.validate_text_and_back_colour_params,
