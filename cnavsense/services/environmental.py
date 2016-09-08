@@ -12,9 +12,9 @@ from cnavsense.utils import sentry
 
 class Sensors(services.PublisherResource):
     topics = {
-        'humidity': cnavconstants.topics.HUMIDITY_TOPIC,
-        'temperature': cnavconstants.topics.TEMPERATURE_TOPIC,
-        'pressure': cnavconstants.topics.PRESSURE_TOPIC,
+        'humidity': cnavconstants.topics.HUMIDITY,
+        'temperature': cnavconstants.topics.TEMPERATURE,
+        'pressure': cnavconstants.topics.PRESSURE,
     }
 
     def __init__(self, *args, **kwargs):

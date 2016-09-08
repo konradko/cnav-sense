@@ -13,8 +13,8 @@ from cnavsense.utils import sentry
 
 class Sensors(services.PublisherResource):
     topics = {
-        'orientation': cnavconstants.topics.ORIENTATION_TOPIC,
-        'compass': cnavconstants.topics.COMPASS_TOPIC,
+        'orientation': cnavconstants.topics.ORIENTATION,
+        'compass': cnavconstants.topics.COMPASS,
     }
 
     def __init__(self, *args, **kwargs):

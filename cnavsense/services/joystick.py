@@ -11,7 +11,7 @@ from cnavsense.utils import sentry
 
 class Joystick(services.PublisherResource):
     topics = {
-        'joystick': cnavconstants.topics.JOYSTICK_INPUT_TOPIC,
+        'joystick': cnavconstants.topics.JOYSTICK,
     }
 
     def __init__(self, *args, **kwargs):
