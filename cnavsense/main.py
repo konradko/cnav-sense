@@ -3,6 +3,8 @@ import sys
 
 sys.path.append(os.getcwd())
 
+from zmqservices import messages
+
 from cnavsense import settings
 from cnavsense.utils import sentry, logger
 from cnavsense.services import environmental, inertial, joystick, led_matrix
@@ -12,10 +14,20 @@ from cnavsense.services import environmental, inertial, joystick, led_matrix
 def run():
     logger.info("Starting...")
 
-    environmental.Service().start()
-    inertial.Service().start()
-    joystick.Service().start()
-    led_matrix.Service().start()
+    environmental_service = environmental.Service()
+    environmental_service.start()
+
+    inertial_service = inertial.Service()
+    inertial_service.start()
+
+    joystick_service = joystick.Service()
+    joystick_service.start()
+
+    led_matrix_service = led_matrix.Service()
+    led_matrix_service.start()
+    led_matrix_service.get_client().request(
+        message=messages.JSON(data={'method': 'clear'})
+    )
 
     logger.info("Done")
 

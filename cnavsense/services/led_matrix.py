@@ -1,7 +1,7 @@
 import os
 
 from zmqservices import services
-from cnavconstants.publishers import (
+from cnavconstants.servers import (
     LOCAL_LED_MATRIX_ADDRESS, LED_MATRIX_PORT_ADDRESS
 )
 
