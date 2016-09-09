@@ -35,7 +35,7 @@ class LedMatrix(services.JsonrpcServerResource):
 
     def run(self, *args, **kwargs):
         with sentry():
-            super(LedMatrix, self).start(*args, **kwargs)
+            super(LedMatrix, self).run(*args, **kwargs)
 
     @staticmethod
     def validate_no_params(params=None):
