@@ -33,6 +33,10 @@ class LedMatrix(services.JsonrpcServerResource):
             ),
         }
 
+    def run(self, *args, **kwargs):
+        with sentry():
+            super(LedMatrix, self).start(*args, **kwargs)
+
     @staticmethod
     def validate_no_params(params=None):
         return params is None
@@ -156,9 +160,8 @@ class Service(services.JsonrpcServer):
     port = LED_MATRIX_PORT_ADDRESS
 
 
-@sentry
 def start():
-    return Service()
+    return Service().start()
 
 
 if __name__ == '__main__':

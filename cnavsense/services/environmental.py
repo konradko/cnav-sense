@@ -23,14 +23,15 @@ class Sensors(services.PublisherResource):
         self.driver = kwargs.pop('driver', settings.SENSE_HAT_DRIVER)
 
     def run(self):
-        while True:
-            time.sleep(settings.ENVIRONMENTAL_SENSORS_INTERVAL)
+        with sentry():
+            while True:
+                time.sleep(settings.ENVIRONMENTAL_SENSORS_INTERVAL)
 
-            for topic in self.topics:
-                self.publisher.send(messages.JSON(
-                    topic=self.topics[topic],
-                    data=getattr(self, topic),
-                ))
+                for topic in self.topics:
+                    self.publisher.send(messages.JSON(
+                        topic=self.topics[topic],
+                        data=getattr(self, topic),
+                    ))
 
     @property
     def humidity(self):
@@ -57,9 +58,8 @@ class Service(services.PublisherService):
     subscriber = pubsub.LastMessageSubscriber
 
 
-@sentry
 def start():
-    return Service()
+    return Service().start()
 
 
 if __name__ == '__main__':

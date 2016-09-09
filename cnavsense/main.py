@@ -10,7 +10,6 @@ from cnavsense.utils import sentry, logger
 from cnavsense.services import environmental, inertial, joystick, led_matrix
 
 
-@sentry
 def run():
     logger.info("Starting...")
 
@@ -33,7 +32,8 @@ def run():
 
 
 if __name__ == '__main__':
-    if settings.RUNNING_ON_PI:
-        run()
-    else:
-        logger.warning("Not running on a Raspberry Pi")
+    with sentry():
+        if settings.RUNNING_ON_PI:
+            run()
+        else:
+            logger.warning("Not running on a Raspberry Pi")

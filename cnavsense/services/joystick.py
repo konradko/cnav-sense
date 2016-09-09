@@ -20,13 +20,16 @@ class Joystick(services.PublisherResource):
         self.driver = kwargs.pop('driver', settings.SENSE_HAT_DRIVER)
 
     def run(self):
-        while True:
-            input_event = self.driver.stick.wait_for_event(emptybuffer=True)
+        with sentry():
+            while True:
+                input_event = self.driver.stick.wait_for_event(
+                    emptybuffer=True
+                )
 
-            self.publisher.send(messages.JSON(
-                topic=self.topics['joystick'],
-                data=self.format_event(input_event),
-            ))
+                self.publisher.send(messages.JSON(
+                    topic=self.topics['joystick'],
+                    data=self.format_event(input_event),
+                ))
 
     @staticmethod
     def format_event(event):
@@ -46,9 +49,8 @@ class Service(services.PublisherService):
     subscriber = pubsub.Subscriber
 
 
-@sentry
 def start():
-    return Service()
+    return Service().start()
 
 
 if __name__ == '__main__':
