@@ -3,13 +3,19 @@
 echo "Enabling I2C"
 modprobe i2c-dev
 
-echo "Starting Papertrail"
-bash /usr/src/app/config/papertrail.sh
+case "$PAPERTRAIL_ON" in
+ true) bash /usr/src/app/config/papertrail.sh ;;
+    *) echo "Papertrail not enabled" ;;
+esac
 
-echo "Starting OpenSSH"
-bash /usr/src/app/config/openssh.sh
+case "$LOCAL_SSH_ON" in
+ true) bash /usr/src/app/config/openssh.sh ;;
+    *) echo "Local SSH not enabled" ;;
+esac
 
-echo "Starting Prometheus"
-bash /usr/src/app/config/prometheus.sh
+case "$PROMETHEUS_ON" in
+ true) bash /usr/src/app/config/prometheus.sh ;;
+    *) echo "Prometheus not enabled" ;;
+esac
 
 python cnavsense/main.py
