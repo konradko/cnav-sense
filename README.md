@@ -1,5 +1,5 @@
 # cnav-sense
-Sense HAT messaging system for (cnav-sense)[https://circleci.com/gh/konradko/cnav-sense].
+Sense HAT messaging system for [cnav-sense](https://circleci.com/gh/konradko/cnav-sense).
 
 ## Required hardware
 
