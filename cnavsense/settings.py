@@ -35,7 +35,7 @@ logging.config.dictConfig({
     },
     'handlers': {
         'rotating_file': {
-            'class': 'logging.handlers.RotatingFileHandler',
+            'class': 'zmqservices.utils.MultiprocessingRotatingFileHandler',
             'filename': SENSE_LOG_PATH,
             'maxBytes': 10 * 1024 * 1024,
             'backupCount': 5,
