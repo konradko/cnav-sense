@@ -1,8 +1,6 @@
 import logging.config
 import os
 
-from raven import Client
-
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -26,8 +24,7 @@ else:
 # Logging #####################################################################
 
 SENSE_LOG_PATH = os.environ.get('SENSE_LOG_PATH', '/tmp/cnavsense.log')
-SENTRY_DSN = os.environ.get('SENTRY_DSN', '')
-SENTRY_CLIENT = Client(SENTRY_DSN) if SENTRY_DSN else None
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
 
 logging.config.dictConfig({
     'version': 1,

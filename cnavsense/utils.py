@@ -1,6 +1,8 @@
 from contextlib import contextmanager
 import logging.config
 
+import raven
+
 from cnavsense import settings
 
 
@@ -12,9 +14,9 @@ def sentry():
     try:
         yield
     except:
-        if settings.SENTRY_CLIENT:
+        if settings.SENTRY_DSN:
             # prints traceback
             logging.exception("Exception occurred, sending to Sentry:")
-            settings.SENTRY_CLIENT.captureException()
+            raven.Client(settings.SENTRY_DSN).captureException()
         else:
             raise
