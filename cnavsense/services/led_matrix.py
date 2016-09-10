@@ -39,7 +39,7 @@ class LedMatrix(services.JsonrpcServerResource):
 
     @staticmethod
     def validate_no_params(params=None):
-        return params is None
+        return not params
 
     @staticmethod
     def validate_set_rotation_params(params):
