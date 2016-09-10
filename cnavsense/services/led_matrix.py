@@ -56,12 +56,12 @@ class LedMatrix(services.JsonrpcServerResource):
 
     @staticmethod
     def pixel_is_valid(pixel):
-        return len(pixel) == 3 and (
+        return pixel and (len(pixel) == 3 and (
             all((
                 (isinstance(colour, int) and colour in range(0, 255))
                 for colour in pixel
             ))
-        )
+        ))
 
     @staticmethod
     def validate_set_pixels_params(params):
@@ -115,7 +115,7 @@ class LedMatrix(services.JsonrpcServerResource):
 
     @staticmethod
     def validate_set_colour_params(params):
-        return LedMatrix.pixel_is_valid(params.get('pixel'))
+        return LedMatrix.pixel_is_valid(params.get('colour'))
 
     def set_colour(self, colour):
         self.driver.clear(colour)
