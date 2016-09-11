@@ -57,6 +57,7 @@ if LED_MATRIX_SERVICE_ENABLED == 'true':
 else:
     LED_MATRIX_SERVICE_ENABLED = False
 
+
 # Logging #####################################################################
 
 SENSE_LOG_PATH = os.environ.get('SENSE_LOG_PATH', '/tmp/cnavsense.log')
@@ -66,6 +67,9 @@ logging.config.dictConfig({
     'version': 1,
     'formatters': {
         'default': {
+            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        },
+        'sentry': {
             'format': (
                 '[%(asctime)s][%(levelname)s] %(name)s '
                 '%(filename)s:%(funcName)s:%(lineno)d | %(message)s'
@@ -91,6 +95,7 @@ logging.config.dictConfig({
             'class': 'raven.handlers.logging.SentryHandler',
             'dsn': SENTRY_DSN,
             'level': 'ERROR',
+            'formatter': 'sentry',
         },
     },
     'root': {
