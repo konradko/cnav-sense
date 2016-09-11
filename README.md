@@ -18,21 +18,21 @@ Sense HAT messaging system for [cnav-sense](https://circleci.com/gh/konradko/cna
 ## Deployment setup
 
 1. Create a new Raspberry Pi 1 / Zero application (e.g. `cnavsense`) on [resin.io](https://dashboard.resin.io/)
+    1. Resin OS => 1.11.0 is required for Sense HAT, newer (but less stable) OS versions are available on [resinstaging.io](https://dashboard.resinstaging.io)
+    2. You can create an app on both and copy ``config.json`` file from resinstaging.io SD card to resin.io one - that way it will show up on resin.io
 2. Add resin remote to the `cnav-sense` repository, e.g.:
 
     ```
     $ git remote add resin username@git.resin.io:username/cnavsense.git
     ```
 
-3. Enable Pi ~er
+3. Decrease GPU memory
 
 | Fleet Configuration variable | Value |
 | ------------- | ------------- |
-| RESIN_HOST_CONFIG_gpu_mem | 256 |
-| RESIN_HOST_CONFIG_fixup_file | fixup_x.dat |
-| RESIN_HOST_CONFIG_start_file | start_x.elf |
+| RESIN_HOST_CONFIG_gpu_mem | 16 |
 
-4. Download resin.io application device OS and flash it on an SD card ([etcher.io](https://www.etcher.io/) recommended)
+4. Use resin.io application device OS and flash it on an SD card ([etcher.io](https://www.etcher.io/) recommended)
 5. Put the SD card in the Raspberry Pi and wait for it to update (check status on [resin.io](https://dashboard.resin.io/) dashboard)
 
 
