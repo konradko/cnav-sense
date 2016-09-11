@@ -30,7 +30,11 @@ logging.config.dictConfig({
     'version': 1,
     'formatters': {
         'default': {
-            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            'format': (
+                '[%(asctime)s][%(levelname)s] %(name)s '
+                '%(filename)s:%(funcName)s:%(lineno)d | %(message)s'
+            ),
+            'datefmt': '%H:%M:%S',
         }
     },
     'handlers': {
@@ -40,22 +44,29 @@ logging.config.dictConfig({
             'maxBytes': 10 * 1024 * 1024,
             'backupCount': 5,
             'formatter': 'default',
-            'level': logging.INFO,
+            'level': 'INFO',
         },
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'default',
-            'level': logging.DEBUG,
+            'level': 'DEBUG',
+        },
+        'sentry': {
+            'class': 'raven.handlers.logging.SentryHandler',
+            'dsn': SENTRY_DSN,
+            'level': 'ERROR',
         },
     },
     'root': {
         'handlers': [
             'rotating_file',
             'console',
+            'sentry',
         ],
-        'level': logging.DEBUG,
+        'level': 'DEBUG',
     },
 })
+
 
 # Sensors #####################################################################
 

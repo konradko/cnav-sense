@@ -6,7 +6,7 @@ sys.path.append(os.getcwd())
 from zmqservices import messages
 
 from cnavsense import settings
-from cnavsense.utils import sentry, logger
+from cnavsense.utils import log_exceptions, logger
 from cnavsense.services import environmental, inertial, joystick, led_matrix
 
 
@@ -32,7 +32,7 @@ def run():
 
 
 if __name__ == '__main__':
-    with sentry():
+    with log_exceptions():
         if settings.RUNNING_ON_PI:
             run()
         else:

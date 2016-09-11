@@ -8,7 +8,7 @@ import cnavconstants.topics
 
 
 from cnavsense import settings
-from cnavsense.utils import sentry
+from cnavsense.utils import log_exceptions
 
 
 class Sensors(services.PublisherResource):
@@ -23,7 +23,7 @@ class Sensors(services.PublisherResource):
         self.driver = kwargs.pop('driver', settings.SENSE_HAT_DRIVER)
 
     def run(self):
-        with sentry():
+        with log_exceptions():
             sleep_time = settings.INERTIAL_SENSORS_INTERVAL
 
             while True:

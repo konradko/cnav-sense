@@ -6,7 +6,7 @@ from cnavconstants.servers import (
 )
 
 from cnavsense import settings
-from cnavsense.utils import sentry, logger
+from cnavsense.utils import log_exceptions, logger
 
 
 class LedMatrix(services.JsonrpcServerResource):
@@ -34,7 +34,7 @@ class LedMatrix(services.JsonrpcServerResource):
         }
 
     def run(self, *args, **kwargs):
-        with sentry():
+        with log_exceptions():
             super(LedMatrix, self).run(*args, **kwargs)
 
     @staticmethod
