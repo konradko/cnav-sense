@@ -21,6 +21,42 @@ else:
     SENSE_HAT_DRIVER = None
 
 
+# Services  ###################################################################
+ENVIRONMENTAL_SERVICE_ENABLED = os.getenv(
+    'ENVIRONMENTAL_SERVICE_ENABLED', 'false'
+)
+if ENVIRONMENTAL_SERVICE_ENABLED == 'true':
+    ENVIRONMENTAL_SERVICE_ENABLED = True
+else:
+    ENVIRONMENTAL_SERVICE_ENABLED = False
+
+
+INERTIAL_SERVICE_ENABLED = os.getenv(
+    'INERTIAL_SERVICE_ENABLED', 'true'
+)
+if INERTIAL_SERVICE_ENABLED == 'true':
+    INERTIAL_SERVICE_ENABLED = True
+else:
+    INERTIAL_SERVICE_ENABLED = False
+
+
+JOYSTICK_SERVICE_ENABLED = os.getenv(
+    'JOYSTICK_SERVICE_ENABLED', 'true'
+)
+if JOYSTICK_SERVICE_ENABLED == 'true':
+    JOYSTICK_SERVICE_ENABLED = True
+else:
+    JOYSTICK_SERVICE_ENABLED = False
+
+
+LED_MATRIX_SERVICE_ENABLED = os.getenv(
+    'LED_MATRIX_SERVICE_ENABLED', 'true'
+)
+if LED_MATRIX_SERVICE_ENABLED == 'true':
+    LED_MATRIX_SERVICE_ENABLED = True
+else:
+    LED_MATRIX_SERVICE_ENABLED = False
+
 # Logging #####################################################################
 
 SENSE_LOG_PATH = os.environ.get('SENSE_LOG_PATH', '/tmp/cnavsense.log')

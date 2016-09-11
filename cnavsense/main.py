@@ -13,20 +13,21 @@ from cnavsense.services import environmental, inertial, joystick, led_matrix
 def run():
     logger.info("Starting...")
 
-    environmental_service = environmental.Service()
-    environmental_service.start()
+    if settings.ENVIRONMENTAL_SERVICE_ENABLED:
+        environmental.Service().start()
 
-    inertial_service = inertial.Service()
-    inertial_service.start()
+    if settings.INERTIAL_SERVICE_ENABLED:
+        inertial.Service().start()
 
-    joystick_service = joystick.Service()
-    joystick_service.start()
+    if settings.JOYSTICK_SERVICE_ENABLED:
+        joystick.Service().start()
 
-    led_matrix_service = led_matrix.Service()
-    led_matrix_service.start()
-    led_matrix_service.get_client().request(
-        message=messages.JSON(data={'method': 'clear'})
-    )
+    if settings.LED_MATRIX_SERVICE_ENABLED:
+        led_matrix_service = led_matrix.Service()
+        led_matrix_service.start()
+        led_matrix_service.get_client().request(
+            message=messages.JSON(data={'method': 'clear'})
+        )
 
     logger.info("Done")
 
