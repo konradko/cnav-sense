@@ -9,6 +9,19 @@ RUNNING_ON_PI = (
     HOSTNAME.startswith('raspberrypi') and MACHINE.startswith('arm')
 )
 
+# Sense HAT ###################################################################
+
+ENVIRONMENTAL_SENSORS_INTERVAL = float(
+    os.getenv('ENVIRONMENTAL_SENSORS_INTERVAL', 0)
+)
+
+INERTIAL_SENSORS_INTERVAL = float(
+    os.getenv('INERTIAL_SENSORS_INTERVAL', 0)
+)
+
+LED_MATRIX_DEFAULT_TEXT_SCROLL_SPEED = float(
+    os.getenv('LED_MATRIX_DEFAULT_TEXT_SCROLL_SPEED', 1)
+)
 
 # Drivers #####################################################################
 
@@ -107,14 +120,3 @@ logging.config.dictConfig({
         'level': 'DEBUG',
     },
 })
-
-
-# Sensors #####################################################################
-
-ENVIRONMENTAL_SENSORS_INTERVAL = float(
-    os.getenv('ENVIRONMENTAL_SENSORS_INTERVAL', 0)
-)
-
-INERTIAL_SENSORS_INTERVAL = float(
-    os.getenv('INERTIAL_SENSORS_INTERVAL', 0)
-)

@@ -124,7 +124,8 @@ class LedMatrix(services.JsonrpcServerResource):
         return all((LedMatrix.pixel_is_valid(p) for p in pixels if p))
 
     def show_message(
-            self, text, scroll_speed=0.1,
+            self, text,
+            scroll_speed=settings.LED_MATRIX_DEFAULT_TEXT_SCROLL_SPEED,
             text_colour=(255, 255, 255), back_colour=(0, 0, 0)):
 
         self.driver.show_message(
