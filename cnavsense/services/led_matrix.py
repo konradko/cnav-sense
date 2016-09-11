@@ -1,3 +1,4 @@
+import logging
 import os
 
 from zmqservices import services
@@ -6,7 +7,10 @@ from cnavconstants.servers import (
 )
 
 from cnavsense import settings
-from cnavsense.utils import log_exceptions, logger
+from cnavsense.utils import log_exceptions
+
+
+logger = logging.getLogger()
 
 
 class LedMatrix(services.JsonrpcServerResource):

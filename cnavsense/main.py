@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 
@@ -6,8 +7,11 @@ sys.path.append(os.getcwd())
 from zmqservices import messages
 
 from cnavsense import settings
-from cnavsense.utils import log_exceptions, logger
+from cnavsense.utils import log_exceptions
 from cnavsense.services import environmental, inertial, joystick, led_matrix
+
+
+logger = logging.getLogger()
 
 
 def run():
