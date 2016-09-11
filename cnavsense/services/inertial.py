@@ -24,8 +24,11 @@ class Sensors(services.PublisherResource):
 
     def run(self):
         with sentry():
+            sleep_time = settings.INERTIAL_SENSORS_INTERVAL
+
             while True:
-                time.sleep(settings.INERTIAL_SENSORS_INTERVAL)
+                if sleep_time:
+                    time.sleep(sleep_time)
 
                 for topic in self.topics:
                     self.publisher.send(messages.JSON(
@@ -41,10 +44,7 @@ class Sensors(services.PublisherResource):
             accel_enabled=True,
         )
 
-        return {
-            'radians': self.driver.get_orientation_radians(),
-            'degrees': self.driver.get_orientation_degrees(),
-        }
+        return self.driver.get_orientation_degrees()
 
     @property
     def compass(self):

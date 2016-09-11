@@ -24,8 +24,11 @@ class Sensors(services.PublisherResource):
 
     def run(self):
         with sentry():
+            sleep_time = settings.ENVIRONMENTAL_SENSORS_INTERVAL
+
             while True:
-                time.sleep(settings.ENVIRONMENTAL_SENSORS_INTERVAL)
+                if sleep_time:
+                    time.sleep(sleep_time)
 
                 for topic in self.topics:
                     self.publisher.send(messages.JSON(

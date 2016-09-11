@@ -59,10 +59,10 @@ logging.config.dictConfig({
 
 # Sensors #####################################################################
 
-ENVIRONMENTAL_SENSORS_INTERVAL = int(
-    os.getenv('ENVIRONMENTAL_SENSORS_INTERVAL', 1)
+ENVIRONMENTAL_SENSORS_INTERVAL = float(
+    os.getenv('ENVIRONMENTAL_SENSORS_INTERVAL', 0)
 )
 
-INERTIAL_SENSORS_INTERVAL = int(
-    os.getenv('INERTIAL_SENSORS_INTERVAL', 1)
+INERTIAL_SENSORS_INTERVAL = float(
+    os.getenv('INERTIAL_SENSORS_INTERVAL', 0)
 )
