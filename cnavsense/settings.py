@@ -20,7 +20,7 @@ INERTIAL_SENSORS_INTERVAL = float(
 )
 
 LED_MATRIX_DEFAULT_TEXT_SCROLL_SPEED = float(
-    os.getenv('LED_MATRIX_DEFAULT_TEXT_SCROLL_SPEED', 1)
+    os.getenv('LED_MATRIX_DEFAULT_TEXT_SCROLL_SPEED', 0.1)
 )
 
 # Drivers #####################################################################
@@ -110,13 +110,23 @@ logging.config.dictConfig({
             'level': 'ERROR',
             'formatter': 'sentry',
         },
+        'papertrail': {
+            'class': 'logging.handlers.SysLogHandler',
+            'formatter': 'default',
+            'address': (
+                os.getenv('PAPERTRAIL_HOST'), os.getenv('PAPERTRAIL_PORT')
+            ),
+            'level': 'INFO',
+        }
     },
     'root': {
         'handlers': [
             'rotating_file',
             'console',
             'sentry',
+            'papertrail',
         ],
         'level': 'DEBUG',
     },
 })
+

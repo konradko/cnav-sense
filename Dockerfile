@@ -15,13 +15,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     nmap && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install papertrail client
-RUN wget https://github.com/papertrail/remote_syslog2/releases/download/v0.18-beta1/remote_syslog_linux_arm.tar.gz \
-    && tar -xzf remote_syslog_linux_arm.tar.gz \
-    && mv remote_syslog/remote_syslog /usr/local/bin/ \
-    && rm -rf remote_syslog \
-    && rm remote_syslog_linux_arm.tar.gz
-COPY config/papertrail/log_files.yml /etc/
+# Install papertrail service
 COPY config/papertrail/papertrail.service /etc/systemd/system/
 
 
