@@ -2,6 +2,7 @@
 
 pytest
 pytest-cov
+pytest-timeout
 xenon
 mock
 flake8

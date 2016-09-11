@@ -53,7 +53,7 @@ xenon:
 	xenon --max-absolute B --max-modules B --max-average A cnavsense/
 
 test: static_analysis
-	py.test cnavsense --cov=cnavsense $(pytest_args)
+	py.test -rw cnavsense --timeout=1 --cov=cnavsense $(pytest_args)
 
 deploy:
 	git push resin master
