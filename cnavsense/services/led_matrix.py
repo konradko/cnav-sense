@@ -119,11 +119,9 @@ class LedMatrix(services.JsonrpcServerResource):
 
     @staticmethod
     def validate_text_and_back_colour_params(params):
-        return all((
-            LedMatrix.pixel_is_valid(p) for p in (
-                params.get('text_colour'), params.get('back_colour')
-            )
-        ))
+        pixels = (params.get('back_colour'), params.get('text_colour'))
+
+        return all((LedMatrix.pixel_is_valid(p) for p in pixels if p))
 
     def show_message(
             self, text, scroll_speed=0.1,
@@ -135,6 +133,7 @@ class LedMatrix(services.JsonrpcServerResource):
             text_colour=text_colour,
             back_colour=back_colour,
         )
+        self.clear()
 
     def show_letter(
             self, letter, text_colour=(255, 255, 255), back_colour=(0, 0, 0)):
