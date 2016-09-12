@@ -128,6 +128,6 @@ logging.config.dictConfig({
             'papertrail',
         ],
         'level': 'DEBUG',
+        'propagate': True,
     },
 })
-
